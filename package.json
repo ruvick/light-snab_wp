@@ -1,0 +1,50 @@
+{
+  "name": "light",
+  "version": "1.0.1",
+  "description": "Магазин дизайнерского света",
+  "main": "index.php",
+  "scripts": {
+    "test": "editorconfig-checker",
+    "clear_r": "ssh u0743099@ftp.light-snab.ru \"rm  lsnab/wp-content/themes/light/*.*\"",
+    "send_r": "scp -C *.php *.png *.css u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_ms": "scp -C *.css u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_head": "scp -C header.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_func": "scp -C functions.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_index": "scp -C index.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_footer": "scp -C footer.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_one": "scp -C modal-win.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_carbon": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/inc\"",
+    "send_carbon": "scp -C -r inc u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_carbon_fild": "scp -C themes-fields.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_dir": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/template-parts\"",
+    "send_part": "scp -C -r template-parts u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_img": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/img\"",
+    "send_img": "scp -r img u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_images": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/images\"",
+    "send_images": "scp -r images *.svg u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_js": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/js\"",
+    "send_js": "scp -r js u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_css": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/css\"",
+    "send_css": "scp -C -r css u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "mk_part_fonts": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/fonts\"",
+    "send_fonts": "scp -C -r fonts u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_all": "npm run send_r & npm run send_css & npm run send_part & npm run send_img & npm run send_image & npm run send_js & npm run send_fonts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruvick/light-snab_wp.git"
+  },
+  "keywords": [
+    "wp",
+    "WordPress"
+  ],
+  "author": "ruvick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ruvick/light-snab_wp/issues"
+  },
+  "homepage": "https://github.com/ruvick/light-snab_wp#readme",
+  "dependencies": {
+    "group-css-media-queries": "^1.4.1"
+  }
+}
