@@ -11,7 +11,7 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?>> 
 
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -43,6 +43,16 @@
 </head>
 
 <body <?php body_class(); ?>>
+
+<!-- Скрипт корзины, отправка -->
+<script>  
+  let main_page = "<?echo get_bloginfo("url"); ?>";
+  let kabinet_page = "<?echo get_the_permalink(219); ?>";
+  let bascet_page = "<?echo get_the_permalink(17); ?>"; 
+  let thencs_page = "<?echo get_the_permalink(2312); ?>";  
+  let nophoto_page = "<?echo get_bloginfo("template_url");?>/img/no-photo.jpg";
+</script> 
+
   <div style="display: none;">
     <div class="box-modal" id="messgeModal">
         <div class="box-modal_close arcticmodal-close">закрыть</div>

@@ -1,3 +1,103 @@
+// Файлы Java Script -----------------------------------------------------------------------------------------------------
+
+// возвращает куки с указанным name,
+// или undefined, если ничего не найдено
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
+function inBascetCounting() {
+  cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart == null) cart = [];
+  for (let i = 0; i < cart.length; i++) {
+    let element = document.getElementById('bcounter_' + cart[i].sku);
+    if (element != null)
+      element.innerHTML = "(" + cart[i].count + ")";
+  }
+}
+
+function number_format() {
+  let elements = document.querySelectorAll('.price_formator');
+  for (let elem of elements) {
+    elem.dataset.realPrice = elem.innerHTML;
+    elem.innerHTML = Number(elem.innerHTML).toLocaleString('ru-RU');
+  }
+}
+
+
+//--- Корзина -------------------------------------------------------------------------------------------------------------
+
+let cart = [];
+let cartCount = 0;
+
+function cart_recalc() {
+  cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart == null) cart = [];
+  cartCount = 0;
+  cartSumm = 0;
+  for (let i = 0; i < cart.length; i++) {
+    cartCount += Number(cart[i].count);
+
+    cartSumm += Number(cart[i].count) * parseFloat(cart[i].price);
+  }
+
+  localStorage.setItem("cartcount", cartCount);
+  localStorage.setItem("cartsumm", cartSumm);
+
+  let elements = document.querySelectorAll('.bascet_counter');
+  for (let elem of elements) {
+    elem.innerHTML = cartCount;
+  }
+
+}
+
+function add_tocart(elem, countElem) {
+
+  let cartElem = {
+    sku: elem.dataset.sku,
+    size: elem.dataset.size,
+    lnk: elem.dataset.lnk,
+    price: elem.dataset.price,
+    priceold: elem.dataset.oldprice,
+    subtotal: elem.dataset.price,
+    name: elem.dataset.name,
+    count: (countElem == 0) ? elem.dataset.count : countElem,
+    picture: elem.dataset.picture
+  };
+
+  if (cart.length == 0) {
+    cart.push(cartElem);
+  } else {
+    let addet = true;
+    for (let i = 0; i < cart.length; i++) {
+      if ((cart[i].sku == cartElem.sku) && (cart[i].size == cartElem.size)) {
+        cart[i].count++;
+        cart[i].subtotal = Number(cart[i].count) * parseFloat(cart[i].price);
+        addet = false;
+        break;
+      }
+    }
+
+    if (addet)
+      cart.push(cartElem);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  cart_recalc();
+
+  console.log(cartElem);
+}
+// Файлы Java Script End -----------------------------------------------------------------------------------------------------
+
+
+
+
+// jQuery ======================================================================================================
+
 jQuery(document).ready(function ($) {
   $(".main-slider").slick({
     dots: true,
@@ -37,21 +137,21 @@ jQuery(document).ready(function ($) {
         settings: {
           slidesToShow: 3,
         }
-    },
+      },
       {
         breakpoint: 760,
         settings: {
           slidesToShow: 2,
         }
-    },
+      },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
         }
-    }
-  ]
+      }
+    ]
   });
   lightbox.option({
     'resizeDuration': 200,
@@ -59,7 +159,7 @@ jQuery(document).ready(function ($) {
     'albumLabel': ''
   });
 
-  $('.page-brands-wrapper a').click(function(e) {
+  $('.page-brands-wrapper a').click(function (e) {
     e.preventDefault();
     var src = $(this).children('img').attr('src');
     var text = $(this).data('text');
@@ -69,105 +169,105 @@ jQuery(document).ready(function ($) {
     $('#brand-modal').arcticmodal();
   });
 
-  jQuery(".uniSendBtn").click(function(e){ 
-      e.preventDefault();
-      var formid = jQuery(this).data("formid");
-      var message = jQuery(this).data("mailmsg");
-      var phone = $(this).parent().find('input[type=tel]').val();
-      var name = $(this).parent().find('input[name=name]').val();
-      var email = $(this).parent().find('input[name=email]').val();
-      var comment = $(this).parent().find('textarea[name=message]').val();
-      
-      if ((phone == "")||(phone.indexOf("_")>0)) {
-        $(this).parent().find('input[type=tel]').css("background-color","#ff91a4")
-      } else {
-        var  jqXHR = jQuery.post(
-          allAjax.ajaxurl,
-          {
-            action: 'universal_send',    
-            nonce: allAjax.nonce,
-            msg: message,
-            name: name,
-            tel: phone,
-            email: email,
-            comment: comment
-          }
-          
-        );
-        
-        
-        jqXHR.done(function (responce) {
-          
-          jQuery('#messgeModal #lineMsg').html("Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.");
-          jQuery('#messgeModal').arcticmodal();
-          
-        });
-        
-        jqXHR.fail(function (responce) {
-          jQuery('#messgeModal #lineIcon').html('');
-          jQuery('#messgeModal #lineMsg').html("Произошла ошибка! Попробуйте позднее.");
-          jQuery('#messgeModal').arcticmodal();
-        });
-      }
-    });
+  jQuery(".uniSendBtn").click(function (e) {
+    e.preventDefault();
+    var formid = jQuery(this).data("formid");
+    var message = jQuery(this).data("mailmsg");
+    var phone = $(this).parent().find('input[type=tel]').val();
+    var name = $(this).parent().find('input[name=name]').val();
+    var email = $(this).parent().find('input[name=email]').val();
+    var comment = $(this).parent().find('textarea[name=message]').val();
 
-  $(".offers-item__link").click(function(e) {
+    if ((phone == "") || (phone.indexOf("_") > 0)) {
+      $(this).parent().find('input[type=tel]').css("background-color", "#ff91a4")
+    } else {
+      var jqXHR = jQuery.post(
+        allAjax.ajaxurl,
+        {
+          action: 'universal_send',
+          nonce: allAjax.nonce,
+          msg: message,
+          name: name,
+          tel: phone,
+          email: email,
+          comment: comment
+        }
+
+      );
+
+
+      jqXHR.done(function (responce) {
+
+        jQuery('#messgeModal #lineMsg').html("Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.");
+        jQuery('#messgeModal').arcticmodal();
+
+      });
+
+      jqXHR.fail(function (responce) {
+        jQuery('#messgeModal #lineIcon').html('');
+        jQuery('#messgeModal #lineMsg').html("Произошла ошибка! Попробуйте позднее.");
+        jQuery('#messgeModal').arcticmodal();
+      });
+    }
+  });
+
+  $(".offers-item__link").click(function (e) {
     e.preventDefault();
     var partner_name = $(this).data('partner');
     var formid = jQuery(this).data("formid");
     var message = jQuery(this).data("mailmsg");
-    $("#order-modal .uniSendBtn-2").attr({'data-formid': formid, 'data-mailmsg': message});
+    $("#order-modal .uniSendBtn-2").attr({ 'data-formid': formid, 'data-mailmsg': message });
     $("#order-modal input[name=partner]").val(partner_name);
     $('#order-modal').arcticmodal();
   });
-  $(".product-question").click(function(e) {
-      e.preventDefault();
-      var formid = jQuery(this).data("formid");
-      var message = jQuery(this).data("mailmsg");
-      $("#question-modal .uniSendBtn").attr({'data-formid': formid, 'data-mailmsg': message});
-      $('#question-modal').arcticmodal();
+  $(".product-question").click(function (e) {
+    e.preventDefault();
+    var formid = jQuery(this).data("formid");
+    var message = jQuery(this).data("mailmsg");
+    $("#question-modal .uniSendBtn").attr({ 'data-formid': formid, 'data-mailmsg': message });
+    $('#question-modal').arcticmodal();
   });
-    jQuery(".uniSendBtn-2").click(function(e){ 
-      e.preventDefault();
-      var formid = jQuery(this).data("formid");
-      var message = jQuery(this).data("mailmsg");
-      var phone = $(this).parent().find('input[type=tel]').val();
-      var name = $(this).parent().find('input[name=name]').val();
-      var partner = $(this).parent().find('input[name=partner]').val();
-      
-      if ((phone == "")||(phone.indexOf("_")>0)) {
-        $(this).parent().find('input[type=tel]').css("background-color","#ff91a4")
-      } else {
-        var  jqXHR = jQuery.post(
-          allAjax.ajaxurl,
-          {
-            action: 'universal_send_2',    
-            nonce: allAjax.nonce,
-            msg: message,
-            name: name,
-            tel: phone,
-            partner: partner
-          }
-          
-        );
-        
-        
-        jqXHR.done(function (responce) {
-          
-          jQuery('#messgeModal #lineMsg').html("Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.");
-          jQuery('#messgeModal').arcticmodal();
-          $('#order-modal').arcticmodal('close');
-        });
-        
-        jqXHR.fail(function (responce) {
-          jQuery('#messgeModal #lineIcon').html('');
-          jQuery('#messgeModal #lineMsg').html("Произошла ошибка! Попробуйте позднее.");
-          jQuery('#messgeModal').arcticmodal();
-        });
-      }
-    });
+  jQuery(".uniSendBtn-2").click(function (e) {
+    e.preventDefault();
+    var formid = jQuery(this).data("formid");
+    var message = jQuery(this).data("mailmsg");
+    var phone = $(this).parent().find('input[type=tel]').val();
+    var name = $(this).parent().find('input[name=name]').val();
+    var partner = $(this).parent().find('input[name=partner]').val();
 
-  var inputmask_96e76a5f = {"mask":"+7(999)999-99-99"};
+    if ((phone == "") || (phone.indexOf("_") > 0)) {
+      $(this).parent().find('input[type=tel]').css("background-color", "#ff91a4")
+    } else {
+      var jqXHR = jQuery.post(
+        allAjax.ajaxurl,
+        {
+          action: 'universal_send_2',
+          nonce: allAjax.nonce,
+          msg: message,
+          name: name,
+          tel: phone,
+          partner: partner
+        }
+
+      );
+
+
+      jqXHR.done(function (responce) {
+
+        jQuery('#messgeModal #lineMsg').html("Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.");
+        jQuery('#messgeModal').arcticmodal();
+        $('#order-modal').arcticmodal('close');
+      });
+
+      jqXHR.fail(function (responce) {
+        jQuery('#messgeModal #lineIcon').html('');
+        jQuery('#messgeModal #lineMsg').html("Произошла ошибка! Попробуйте позднее.");
+        jQuery('#messgeModal').arcticmodal();
+      });
+    }
+  });
+
+  var inputmask_96e76a5f = { "mask": "+7(999)999-99-99" };
   jQuery("input[type=tel]").inputmask(inputmask_96e76a5f);
 
   function top_btn() {
@@ -199,10 +299,10 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  if($(window).width() < 1250) {
+  if ($(window).width() < 1250) {
     $("#menu-menu-1").append('<div class="menu-close"></div>');
   }
-  $(".menu-close").click(function() {
+  $(".menu-close").click(function () {
     $(this).parent().slideUp();
   });
 });
