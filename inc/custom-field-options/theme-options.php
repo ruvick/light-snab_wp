@@ -95,6 +95,7 @@ Container::make( 'theme_options', 'as_theme_options', 'Настройки тем
           ->set_width(50),
     ) );
 Container::make('post_meta', 'top_banner', 'Баннер на странице')
+  ->show_on_post_type(array('light'))
   ->show_on_post_type(array('page'))
   ->add_fields(array(
     Field::make('image', 'top_banner_img', 'Фото')
@@ -106,33 +107,42 @@ Container::make('post_meta', 'top_banner', 'Баннер на странице')
   ));
 Container::make('post_meta', 'product', 'Дополнительные поля')
   ->add_fields(array(
-    Field::make('text', 'product_sku', 'Артикул')
-      ->set_width(30),
-    Field::make('text', 'product_series', 'Серия')
-      ->set_width(30),
-    Field::make('text', 'product_price', 'Цена')
-      ->set_width(30),
-    Field::make('checkbox', 'product_ceiling', 'На потолок')
-      ->set_width(20),
-    Field::make('checkbox', 'product_wall', 'На стену')
-      ->set_width(20),
-    Field::make('checkbox', 'product_table', 'На стол')
-      ->set_width(20),
-    Field::make('checkbox', 'product_floor', 'На пол')
-      ->set_width(20),
-    Field::make('checkbox', 'product_one', 'Одна лампа')
-      ->set_width(20),
-    Field::make('rich_text', 'product_descr', 'Описание'),
-    Field::make('image', 'product_photo_1', 'Фото')
-      ->set_width(20),
-    Field::make('image', 'product_photo_2', 'Фото')
-      ->set_width(20),
-    Field::make('image', 'product_photo_3', 'Фото')
-      ->set_width(20),
-    Field::make('image', 'product_photo_4', 'Фото')
-      ->set_width(20),
-    Field::make('image', 'product_photo_5', 'Фото')
-      ->set_width(20),
+    Field::make('textarea', 'offer_smile_descr', 'Краткое описание')->set_width(100),
+		Field::make('text', 'offer_name', 'Название товара')->set_width(30),
+		Field::make('text', 'offer_label', 'Метка на товаре')->set_width(30),
+		Field::make('text', 'offer_allsearch', 'Все артикулы для поиска')->set_width(100),
+		Field::make('text', 'offer_siries', 'Серия (для сопутствующих)')->set_width(30),
+		
+
+		Field::make('text', 'offer_sku', 'Артикул (Базовый)')->set_width(50),
+		Field::make('text', 'offer_nal', 'Наличие на складе')->set_default_value('Есть на складе')->set_width(50),
+
+		Field::make('complex', 'offer_cherecter', "Характеристики товара")
+			->add_fields(array(
+				Field::make('text', 'c_name', 'Наименование параметра')->set_width(50),
+				Field::make('text', 'c_val',  'Значение')->set_width(50),
+			)),
+
+		Field::make('text', 'offer_price', 'Цена (Базовая)')->set_width(50),
+		Field::make('text', 'offer_old_price', 'Старая цена (Базовая)')->set_width(50),
+
+		Field::make('complex', 'offer_modification', "Модификация товара")
+			->add_fields(array(
+				Field::make('text', 'mod_name', 'Наименование модификации')->set_width(20),
+				Field::make('text', 'mod_sku', 'Артикул модификации')->set_width(20),
+				Field::make('text', 'mod_price', 'Цена модификации')->set_width(20),
+				Field::make('text', 'mod_old_price', 'Старая цена модификации')->set_width(20),
+				Field::make('text', 'mod_picture_id', 'Изображения модификации')->set_width(20),
+			)),
+
+		Field::make('complex', 'offer_picture', "Галерея товара")
+			->add_fields(array(
+				Field::make('image', 'gal_img', 'Изображение')->set_width(30),
+				Field::make('text', 'gal_img_sku', 'ID для модификации')->set_width(30),
+				Field::make('text', 'gal_img_alt', 'alt и title')->set_width(30)
+			)),
+
+		Field::make('rich_text', 'offer_fulltext', 'Полное описание (SEO)')->set_width(50),
   ));
 Container::make('post_meta', 'as_info', 'Дополнительные поля')
   ->where('post_id', '=', '7')

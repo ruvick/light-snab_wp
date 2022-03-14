@@ -15,7 +15,7 @@
     "send_one": "scp -C modal-win.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
     "mk_part_carbon": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/inc\"",
     "send_carbon": "scp -C -r inc u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
-    "send_carbon_fild": "scp -C themes-fields.php u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_carbon_fild": "scp -C -r inc/custom-field-options u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/inc",
     "mk_part_dir": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/template-parts\"",
     "send_part": "scp -C -r template-parts u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
     "mk_part_img": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/img\"",
@@ -28,6 +28,7 @@
     "send_css": "scp -C -r css u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
     "mk_part_fonts": "ssh u0743099@ftp.light-snab.ru \"mkdir -p lsnab/wp-content/themes/light/fonts\"",
     "send_fonts": "scp -C -r fonts u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
+    "send_pars": "scp -C -r parsing u0743099@ftp.light-snab.ru:lsnab/wp-content/themes/light/",
     "send_all": "npm run send_r & npm run send_css & npm run send_part & npm run send_img & npm run send_image & npm run send_js & npm run send_fonts"
   },
   "repository": {
