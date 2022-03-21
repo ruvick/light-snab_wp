@@ -5387,7 +5387,17 @@ input[type="checkbox"],
 	  }
 
   .main-menu {
-    position: relative
+    position: relative;
+    order: 3;
+  }
+  .header__brand {
+    order: 1;
+    margin-left: auto;
+    margin-right: 35px;
+  }
+  .bascket-icon {
+    order: 2;
+    margin-right: 35px;
   }
 
   .main-menu .menu {
@@ -5724,6 +5734,13 @@ input[type="checkbox"],
   }
 }
 
+@media only screen and (max-width:515px) {
+  .header__brand {
+    display: none;}
+  .bascket-icon {
+    margin-left: auto;}
+}
+
 @media only screen and (max-width:500px) {
   .whom-item {
     width: 80%;
@@ -5865,6 +5882,12 @@ input[type="checkbox"],
     min-width: 120px;
   }
 }
+
+@media only screen and (max-width:414px) {
+  .bascket-icon {
+    margin-right: 20px;}
+}
+
 @media only screen and (max-width:400px) {
   .cooperation-content ol ul {
     padding-left: 0;
@@ -5877,6 +5900,13 @@ input[type="checkbox"],
     height: 323px;
   }
 }
+
+@media only screen and (max-width:375px) {
+.logo {
+  width: 180px;
+  height: 45px;}
+}
+
 @media only screen and (max-width:350px) {
   .header-phone {
     font-size: 14px;
