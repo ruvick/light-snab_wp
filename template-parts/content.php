@@ -32,7 +32,7 @@
 						src = "<?php echo wp_get_attachment_image_src($item['gal_img'], 'full')[0];?>" /> 								
 				</div>
 			<?
-				$pictIndex++;
+				$pictIndex++; 
 					}
 				}
 			?>
@@ -52,7 +52,7 @@
 					</div>
 					<div class="quantity__button quantity__button_plus"></div>
 				</div>
-				<button class="single-product__price-btn more-link" id = "btn__to-card" onclick = "add_tocart(this, 0); return false;"
+				<button class="single-product__price-btn more-link" id = "btn__to-card" onclick = "add_tocart(this, document.getElementById('pageNumeric').value); return false;"
 					data-price = "<?echo carbon_get_post_meta(get_the_ID(),"offer_price"); ?>"
   				data-sku = "<? echo carbon_get_post_meta(get_the_ID(),"offer_sku")?>"
   				data-size = ""
