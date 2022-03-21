@@ -42,7 +42,7 @@
 	
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?>> 
 
 <!-- Скрипт корзины, отправка -->
 <script>  
@@ -53,65 +53,8 @@
   let nophoto_page = "<?echo get_bloginfo("template_url");?>/img/no-photo.jpg";
 </script> 
 
-  <div style="display: none;">
-    <div class="box-modal" id="messgeModal">
-        <div class="box-modal_close arcticmodal-close">закрыть</div>
-        <div class = "modalline" id = "lineIcon">
-    </div>
-    
-    <div class = "modalline" id = "lineMsg">
-    </div>
-    </div>
-  </div>
-
-  <div style="display: none;">
-    <div class="box-modal" id="brand-modal">
-        <div class="box-modal_close arcticmodal-close"></div>
-        <div class = "modalline" id = "lineIcon">
-    </div>
-    
-    <div class = "brand-modal-wrapper" id = "lineMsg">
-      <div class="brand-modal__photo"></div>
-      <div class="brand-modal__content"></div>
-    </div>
-    </div>
-  </div>
-
-  <div style="display: none;">
-    <div class="box-modal" id="order-modal">
-        <div class="box-modal_close arcticmodal-close">закрыть</div>
-        <div class="box-modal_close arcticmodal-close"></div>
-        <div class = "modalline" id = "lineIcon">
-          <form action="">
-            <h2>Стать нашим партнером</h2>
-            <input type="text" name="name" placeholder="Ваше имя">
-            <input type="tel" name="tel" placeholder="Ваш телефон">
-            <input type="hidden" name="partner">
-            <a href="#" class="uniSendBtn-2">Отправить</a>
-          </form>
-        </div>
-    
-    <div class = "modalline" id = "lineMsg">
-    </div>
-    </div>
-  </div>
-  <div style="display: none;">
-    <div class="box-modal" id="question-modal">
-        <div class="box-modal_close arcticmodal-close">закрыть</div>
-        <div class="box-modal_close arcticmodal-close"></div>
-        <div class = "modalline" id = "lineIcon">
-          <form action="">
-            <h2>Задать вопрос</h2>
-            <input type="text" name="name" placeholder="Ваше имя">
-            <input type="tel" name="tel" placeholder="Ваш телефон">
-            <a href="#" class="more-link uniSendBtn">Отправить</a>
-          </form>
-        </div>
-    
-    <div class = "modalline" id = "lineMsg">
-    </div>
-    </div>
-  </div>
+  <!-- Подключение  модальных окон-->
+  <? include "modal-win.php";?>
 
   <div id="page" class="site">
 
@@ -123,7 +66,7 @@
           <a href="mailto:<?php echo carbon_get_theme_option('as_email');?>" class="header-email"><?php echo carbon_get_theme_option('as_email');?></a>
         </div>
       </div>
-      <div class="header-bottom">
+      <div class="header-bottom"> 
         <div class="container">
           <a href="<?php echo home_url('/');?>" class="logo" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_theme_option('as_logo'), 'full')[0];?>)"></a>
 
