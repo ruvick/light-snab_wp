@@ -78,6 +78,8 @@
             </div>
             <?php main_menu();?>
           </nav>
+          <a href="<?php echo get_category_link(3);?>" class="header__brand"></a>
+          <a href="<?php echo get_permalink(17172);?>" class="header__bascket bascket-icon"><span class="bascket-icon__number bascet_counter">0</span></a>
         </div>
       </div>
     </header>
