@@ -1,4 +1,8 @@
 <?php
+
+define("COMPANY_NAME", "light-snab");
+define("MAIL_RESEND", "noreply@ultrakresla.ru");
+
 /**
  * light functions and definitions
  *
@@ -201,12 +205,12 @@ function light_scripts() {
 		wp_enqueue_script( 'bascet', get_template_directory_uri().'/js/bascet.js', array(), $scrypt_version, true); 
 	}
 
-	if ( is_page(219))
-	{
-		wp_enqueue_script( 'vue', get_template_directory_uri().'/js/vue.js', array(), $scrypt_version, true);
-		wp_enqueue_script( 'axios', get_template_directory_uri().'/js/axios.min.js', array(), $scrypt_version, true);
-		wp_enqueue_script( 'cabinet', get_template_directory_uri().'/js/cabinet.js', array(), $scrypt_version, true);
-	}
+	// if ( is_page(219))
+	// {
+	// 	wp_enqueue_script( 'vue', get_template_directory_uri().'/js/vue.js', array(), $scrypt_version, true);
+	// 	wp_enqueue_script( 'axios', get_template_directory_uri().'/js/axios.min.js', array(), $scrypt_version, true);
+	// 	wp_enqueue_script( 'cabinet', get_template_directory_uri().'/js/cabinet.js', array(), $scrypt_version, true);
+	// }
 
 	wp_localize_script( 'main', 'allAjax', array(
       'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -504,7 +508,7 @@ function posts_custom_columns($column_name, $id){
 
 			$headers = array(
 				'From: Сайт '.COMPANY_NAME.' <'.MAIL_RESEND.'>',
-				'content-type: text/html',
+				'content-type: text/html', 
 			);
 		
 			add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
