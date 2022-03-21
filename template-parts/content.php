@@ -15,31 +15,39 @@
 	<?php //light_post_thumbnail(); ?>
 
 	<div class="entry-content single-product">
+
 		<div class="single-product__photo">
-			<div class="single-slider__item" style="background-image: url(<?php echo get_the_post_thumbnail_url();?>);"></div>
-			<?php if(carbon_get_the_post_meta('product_photo_1')):?>
-				<div class="single-slider__item" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_the_post_meta('product_photo_1'), 'full')[0];?>);"></div>
-			<?php endif;?>
-			<?php if(carbon_get_the_post_meta('product_photo_2')):?>
-				<div class="single-slider__item" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_the_post_meta('product_photo_2'), 'full')[0];?>);"></div>
-			<?php endif;?>
-			<?php if(carbon_get_the_post_meta('product_photo_3')):?>
-				<div class="single-slider__item" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_the_post_meta('product_photo_3'), 'full')[0];?>);"></div>
-			<?php endif;?>
-			<?php if(carbon_get_the_post_meta('product_photo_4')):?>
-				<div class="single-slider__item" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_the_post_meta('product_photo_4'), 'full')[0];?>);"></div>
-			<?php endif;?>
-			<?php if(carbon_get_the_post_meta('product_photo_5')):?>
-				<div class="single-slider__item" style="background-image: url(<?php echo wp_get_attachment_image_src(carbon_get_the_post_meta('product_photo_5'), 'full')[0];?>);"></div>
-			<?php endif;?>
+			<div class="cardProductSl _swiper">
+			<?
+				$pict = carbon_get_the_post_meta('offer_picture');
+					if($pict) {
+				$pictIndex = 0;
+					foreach($pict as $item) {
+			?>
+				<div class="single-slider__item slider__slide">
+					<img
+						id = "pict-<? echo empty($item['gal_img_sku'])?$pictIndex:$item['gal_img_sku']; ?>" 
+						alt = "<? echo $item['gal_img_alt']; ?>"
+						title = "<? echo $item['gal_img_alt']; ?>"
+						src = "<?php echo wp_get_attachment_image_src($item['gal_img'], 'full')[0];?>" /> 								
+				</div>
+			<?
+				$pictIndex++;
+					}
+				}
+			?>
+			</div>
+			<!-- Кнопки-точки -->
+			<div class="product-sl-paggination swiper-paggination"></div>
 		</div>
+
 		<div class="single-product__content">
 			<h1 class="single-product__title"><?php the_title();?></h1>
-			<div class="single-product__price single-product__item"> <span class = "parsPrice"><?php echo carbon_get_the_post_meta('product_price');?></span> ₽</div>
+			<div class="single-product__price single-product__item"> <span class = "parsPrice"><?php echo carbon_get_the_post_meta('offer_price');?></span> ₽</div>
 			<div class="single-product__char-wrap single-product__item">
 				<div class="single-product__char">
-					<div class=""><span class="single-product__char-name">Артикул: </span> <span class = "parsSku"><?php echo carbon_get_the_post_meta('product_sku');?></span></div>
-					<div class=""><span class="single-product__char-name">Серия: </span> <span class = "parsSiries"><?php echo carbon_get_the_post_meta('product_series');?></span></div>
+					<div class=""><span class="single-product__char-name">Артикул: </span> <span class = "parsSku"><?php echo carbon_get_the_post_meta('offer_sku');?></span></div>
+					<div class=""><span class="single-product__char-name">Серия: </span> <span class = "parsSiries"><?php echo carbon_get_the_post_meta('offer_siries');?></span></div>
 					<div class=""><span class="single-product__char-name">Применение: </span> 
 						<?php if(carbon_get_the_post_meta('product_ceiling')):
 							echo ' На потолок';endif;?>
@@ -49,14 +57,16 @@
 							echo ' На стол';endif;?>
 						<?php if(carbon_get_the_post_meta('product_floor')):
 							echo ' На пол';endif;?>
-						<?php if(carbon_get_the_post_meta('product_one')):
+						<?php if(carbon_get_the_post_meta('product_one')): 
 							echo ' Одна лампа';endif;?></div>
 				</div>
 			</div>
-			<div class="single-product__descr1 single-product__item">
+
+			<!-- <div class="single-product__descr1 single-product__item">
 				<?php echo carbon_get_the_post_meta('product_descr');?>
 			</div>
-			<a href="#" class="more-link product-question" data-mailmsg="Задать вопрос о товаре <?php the_title();?>">Хочу купить</a>
+			<a href="#" class="more-link product-question" data-mailmsg="Задать вопрос о товаре <?php the_title();?>">Хочу купить</a> -->
+
 		</div>
 	</div><!-- .entry-content -->
 	<div class="upsells">
@@ -78,7 +88,7 @@
 			$current_id = get_the_ID();
 			$series_prod = carbon_get_the_post_meta('product_series');
 				$args = array(
-					// 'posts_per_page' => 8,
+					'posts_per_page' => 4,
 					'post_type' => 'post',
 					'post__not_in' => array($current_id),
 					'meta_key' => '_product_series',
@@ -114,7 +124,7 @@
 						<a href="<?php echo get_permalink();?>" class="product-loop">
 							<div class="product-loop__photo" style="background-image: url(<?php the_post_thumbnail_url();?>);"></div>
 							<div class="product-loop__title"><?php the_title();?></div>
-							<div class="product-loop__price"><?php echo carbon_get_the_post_meta('product_price');?> ₽</div>
+							<div class="product-loop__price"><?php echo carbon_get_the_post_meta('offer_price');?> ₽</div>
 							<span class="more-link">Подробнее</span>
 						</a>
 					<?php endwhile;

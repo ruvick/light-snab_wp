@@ -48,7 +48,7 @@
 <script>  
   let main_page = "<?echo get_bloginfo("url"); ?>";
   let kabinet_page = "<?echo get_the_permalink(219); ?>";
-  let bascet_page = "<?echo get_the_permalink(17); ?>"; 
+  let bascet_page = "<?echo get_the_permalink(17172); ?>"; 
   let thencs_page = "<?echo get_the_permalink(2312); ?>";  
   let nophoto_page = "<?echo get_bloginfo("template_url");?>/img/no-photo.jpg";
 </script> 
