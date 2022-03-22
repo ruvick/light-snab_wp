@@ -23,12 +23,6 @@
     <div class="footer-block">
       <h3 class="footer-title">Мы в соцсетях</h3>
       <ul class="soc-menu ul-clean">
-        <?php if(carbon_get_theme_option('as_facebook')):?>
-        <li><a href="<?php echo carbon_get_theme_option('as_facebook');?>" target="_blank"><span style="background-image: url(<?php echo get_template_directory_uri();?>/img/fb.svg)"></span> Facebook</a></li>
-      <?php endif;?>
-        <?php if(carbon_get_theme_option('as_insta')):?>
-        <li><a href="<?php echo carbon_get_theme_option('as_insta');?>" target="_blank"><span style="background-image: url(<?php echo get_template_directory_uri();?>/img/insta.svg)"></span> instagram</a></li>
-      <?php endif;?>
         <?php if(carbon_get_theme_option('as_vk')):?>
         <li><a href="<?php echo carbon_get_theme_option('as_vk');?>" target="_blank"><span style="background-image: url(<?php echo get_template_directory_uri();?>/img/vk.svg)"></span> Вконтакте</a></li>
       <?php endif;?>
