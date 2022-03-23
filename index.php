@@ -50,6 +50,36 @@ get_header();
       </div>
     <?php endif;?>
     </section>
+
+    <section class="popular">
+      <div class="container">
+        <h2 class="popular__title">Популярные товары</h2>
+        <div class="products-wrapper">
+        <?
+					$args = array(
+						'posts_per_page' => 4,
+						'post_type' => 'light',
+						'orderby' => 'rand',
+						'tax_query' => array(
+								array(
+										'taxonomy' => 'lightcat',
+										'field'    => 'slug',
+										'terms'    => 'dizajnerskie-svetilniki'
+								),
+						)
+					);
+					$query = new WP_Query($args);
+
+					foreach( $query->posts as $post ){
+						$query->the_post();
+						get_template_part('template-parts/product-loop');
+					}  
+					wp_reset_postdata(); 
+			?>
+        </div>
+      </div>
+    </section>
+
     <section class="whom">
       <div class="container">
         <a href="<?php echo get_permalink(10);?>" class="whom-item">
@@ -69,6 +99,7 @@ get_header();
         <?php echo carbon_get_theme_option('as_about_text');?>
       </div>
     </section>
+
     <section class="offers">
       <div class="container">
         <div class="offers-item">

@@ -5390,8 +5390,12 @@ input[type="checkbox"],
   margin-left: 3px;
 }
 
-
-
+.popular {
+  padding: 35px 0;
+}
+.popular__title {
+  margin: 0px 0px 25px 0px;
+}
 
 
 
