@@ -67,7 +67,7 @@
 			<div class="single-product__char-wrap single-product__item">
 				<div class="single-product__char">
 					<div class=""><span class="single-product__char-name">Артикул: </span> <span class = "parsSku"><?php echo carbon_get_the_post_meta('offer_sku');?></span></div>
-					<div class=""><span class="single-product__char-name">Серия: </span> <span class = "parsSiries"><?php echo carbon_get_the_post_meta('offer_siries');?></span></div>
+					<!-- <div class=""><span class="single-product__char-name">Серия: </span> <span class = "parsSiries"><?php echo carbon_get_the_post_meta('offer_siries');?></span></div>
 					<div class=""><span class="single-product__char-name">Применение: </span> 
 						<?php if(carbon_get_the_post_meta('product_ceiling')):
 							echo ' На потолок';endif;?>
@@ -79,7 +79,22 @@
 							echo ' На пол';endif;?>
 						<?php if(carbon_get_the_post_meta('product_one')): 
 							echo ' Одна лампа';endif;?></div>
+				</div> -->
+				<div class="single-product__descp">
+				<?
+				$cherecter = carbon_get_the_post_meta('offer_cherecter');
+					if($cherecter) {
+				$cherecterIndex = 0;
+					foreach($cherecter as $item) {
+			?>
+				<p class="single-product__descp-name"><? echo $item['c_name']; ?>: <span class="single-product__descp-value"><? echo $item['c_val']; ?></span></p>
+			<?
+				$cherecterIndex++; 
+					}
+				}
+			?>
 				</div>
+			</div>
 			</div>
 
 			<!-- <div class="single-product__descr1 single-product__item">

@@ -5373,8 +5373,22 @@ input[type="checkbox"],
   border: none;
 }
 
-
-
+.single-product__descp {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.single-product__descp-name {
+  flex: 0 1 45%;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.single-product__descp-value {
+  color: #949599;
+  font-weight: 400;
+  margin-left: 3px;
+}
 
 
 
